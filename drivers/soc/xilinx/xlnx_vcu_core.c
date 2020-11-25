@@ -89,10 +89,10 @@ static int xvcu_core_probe(struct platform_device *pdev)
 	}
 
 	if (xvcu->reset_gpio) {
-		gpiod_set_value(xvcu->reset_gpio, 0);
+		gpiod_set_value(xvcu->reset_gpio, 1);
 		/* min 2 clock cycle of vcu pll_ref, slowest freq is 33.33KHz */
 		usleep_range(60, 120);
-		gpiod_set_value(xvcu->reset_gpio, 1);
+		gpiod_set_value(xvcu->reset_gpio, 0);
 		usleep_range(60, 120);
 	} else {
 		dev_warn(&pdev->dev, "No reset gpio info from dts for vcu. This may lead to incorrect functionality if VCU isolation is removed post initialization.\n");
